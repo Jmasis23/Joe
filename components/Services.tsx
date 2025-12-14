@@ -8,13 +8,10 @@ const Services: React.FC = () => {
 
   const activeService = SERVICES.find(s => s.id === activeTab) || SERVICES[0];
 
-  const openCalendar = () => {
-    // @ts-ignore
-    if (window.Calendly) {
-      // @ts-ignore
-      window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/scalingwithsalesjoe/free-30-minute-strategy-session'
-      });
+  const scrollToAudit = () => {
+    const element = document.getElementById('audit');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -145,7 +142,7 @@ const Services: React.FC = () => {
               </div>
 
               <div className="pt-6">
-                <Button variant="outline" onClick={openCalendar}>
+                <Button variant="outline" onClick={scrollToAudit}>
                   Discuss Project
                 </Button>
               </div>

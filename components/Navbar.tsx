@@ -14,13 +14,10 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const openCalendar = () => {
-    // @ts-ignore
-    if (window.Calendly) {
-      // @ts-ignore
-      window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/scalingwithsalesjoe/free-30-minute-strategy-session'
-      });
+  const scrollToAudit = () => {
+    const element = document.getElementById('audit');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
     return false;
   };
@@ -60,7 +57,7 @@ const Navbar: React.FC = () => {
                 {link.name}
               </a>
             ))}
-            <Button variant="primary" size="sm" onClick={openCalendar}>
+            <Button variant="primary" size="sm" onClick={scrollToAudit}>
               Book Audit
             </Button>
           </div>
@@ -93,7 +90,7 @@ const Navbar: React.FC = () => {
             ))}
             <Button variant="primary" fullWidth onClick={() => {
               setIsOpen(false);
-              openCalendar();
+              scrollToAudit();
             }}>
               Book Audit
             </Button>

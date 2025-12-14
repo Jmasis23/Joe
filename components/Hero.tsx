@@ -8,13 +8,10 @@ const Hero: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const openCalendar = () => {
-    // @ts-ignore
-    if (window.Calendly) {
-      // @ts-ignore
-      window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/scalingwithsalesjoe/free-30-minute-strategy-session'
-      });
+  const scrollToAudit = () => {
+    const element = document.getElementById('audit');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -81,7 +78,7 @@ const Hero: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-              <Button variant="primary" size="lg" onClick={openCalendar}>
+              <Button variant="primary" size="lg" onClick={scrollToAudit}>
                 Book a Free GHL Audit
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
