@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, CheckCircle, AlertTriangle, LayoutDashboard, Users, MessageSquare, BarChart3, Settings, TrendingUp, Bell, MoveHorizontal } from 'lucide-react';
+import { ArrowRight, CheckCircle, AlertTriangle, LayoutDashboard, Users, MessageSquare, BarChart3, Settings, TrendingUp, Bell, MoveHorizontal, ChevronDown } from 'lucide-react';
 import Button from './Button';
 import { HeroBackground } from './HeroBackground';
 
@@ -7,6 +7,35 @@ const Hero: React.FC = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Text Cycle State
+  const words = ["Broken Zaps", "Messy Tags", "Ghost Leads", "GoHighLevel"];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  // Text Cycle Logic
+  useEffect(() => {
+    const typeSpeed = isDeleting ? 50 : 100;
+    const word = words[currentWordIndex];
+
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        setDisplayText(word.substring(0, displayText.length + 1));
+        if (displayText.length === word.length) {
+          setTimeout(() => setIsDeleting(true), 2000); // Pause at end
+        }
+      } else {
+        setDisplayText(word.substring(0, displayText.length - 1));
+        if (displayText.length === 0) {
+          setIsDeleting(false);
+          setCurrentWordIndex((prev) => (prev + 1) % words.length);
+        }
+      }
+    }, typeSpeed);
+
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, currentWordIndex]);
 
   const scrollToAudit = () => {
     const element = document.getElementById('audit');
@@ -48,7 +77,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-dark-900">
+    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-dark-900 min-h-screen flex flex-col justify-center">
       {/* Background Elements */}
       <div className="absolute inset-0 w-full h-full">
         <HeroBackground />
@@ -56,20 +85,21 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)] pointer-events-none"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Content */}
           <div className="text-center lg:text-left">
-            <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 mb-8 hover:bg-white/10 transition-colors cursor-default backdrop-blur-sm">
+            <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 mb-8 hover:bg-white/10 transition-colors cursor-default backdrop-blur-sm group">
               <span className="w-2 h-2 rounded-full bg-neon animate-pulse"></span>
-              <span className="text-xs text-gray-300 uppercase tracking-wider font-semibold">Accepting New Projects for Oct</span>
+              <span className="text-xs text-gray-300 uppercase tracking-wider font-semibold group-hover:text-white transition-colors"> Accepting New Clients </span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight min-h-[160px] lg:min-h-[auto]">
               Stop Wrestling With <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 inline-block mt-2 relative drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                GoHighLevel.
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon to-white inline-block mt-2 relative drop-shadow-[0_0_25px_rgba(204,255,0,0.2)]">
+                {displayText}
+                <span className="animate-pulse text-neon ml-1">|</span>
               </span>
             </h1>
             
@@ -78,7 +108,7 @@ const Hero: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-              <Button variant="primary" size="lg" onClick={scrollToAudit}>
+              <Button variant="primary" size="lg" onClick={scrollToAudit} className="shadow-[0_0_20px_rgba(204,255,0,0.3)] hover:shadow-[0_0_30px_rgba(204,255,0,0.5)]">
                 Book a Free GHL Audit
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -94,7 +124,7 @@ const Hero: React.FC = () => {
               </div>
               <div className="flex items-center">
                 <CheckCircle className="h-4 w-4 text-neon mr-2" />
-                <span>100+ Accounts Fixed</span>
+                <span>100+ hrs saved</span>
               </div>
             </div>
           </div>
@@ -291,6 +321,11 @@ const Hero: React.FC = () => {
 
       {/* Hero Bottom Fade */}
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-dark-900 to-transparent z-20"></div>
+      
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-500 animate-bounce cursor-pointer" onClick={() => document.getElementById('services')?.scrollIntoView({behavior:'smooth'})}>
+         <ChevronDown className="h-6 w-6" />
+      </div>
     </section>
   );
 };
