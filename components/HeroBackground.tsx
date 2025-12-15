@@ -40,6 +40,8 @@ export const HeroBackground: React.FC = () => {
     const colorParticle = 'rgba(204, 255, 0, 0.2)'; 
     const colorLine = 'rgba(204, 255, 0, 0.1)';
     const colorSignal = '#CCFF00'; 
+    const colorWorkflowStroke = 'rgba(204, 255, 0, 0.05)';
+    const colorWorkflowFill = 'rgba(204, 255, 0, 0.01)';
 
     // Initialize Canvas
     const resize = () => {
@@ -98,6 +100,138 @@ export const HeroBackground: React.FC = () => {
       }
     };
 
+    // Draw abstract GHL workflow schematic
+    const drawWorkflow = (time: number) => {
+        const cx = width > 768 ? width * 0.75 : width * 0.5; // Shift to right on desktop
+        const scale = width > 768 ? 1 : 0.7;
+        const startY = height * 0.15;
+        const nodeW = 140 * scale;
+        const nodeH = 70 * scale;
+        const gapY = 80 * scale;
+        const branchW = 180 * scale;
+
+        ctx.strokeStyle = colorWorkflowStroke;
+        ctx.fillStyle = colorWorkflowFill;
+        ctx.lineWidth = 1.5;
+        
+        // Helper: Rounded Rect
+        const roundRect = (x: number, y: number, w: number, h: number, r: number = 8) => {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        };
+
+        // 1. Trigger Node (Pill shape)
+        const tX = cx - nodeW/2;
+        const tY = startY;
+        roundRect(tX, tY, nodeW, nodeH, 35); // More rounded for trigger
+        // Text lines inside
+        ctx.fillStyle = colorWorkflowStroke;
+        ctx.fillRect(tX + 30*scale, tY + 25*scale, nodeW - 60*scale, 4*scale);
+        ctx.fillStyle = colorWorkflowFill;
+
+        // Line down
+        ctx.beginPath();
+        ctx.moveTo(cx, tY + nodeH);
+        ctx.lineTo(cx, tY + nodeH + gapY);
+        ctx.stroke();
+
+        // 2. Action Node (Rect)
+        const aX = cx - nodeW/2;
+        const aY = tY + nodeH + gapY;
+        roundRect(aX, aY, nodeW, nodeH, 8);
+        ctx.fillStyle = colorWorkflowStroke;
+        ctx.fillRect(aX + 20*scale, aY + 20*scale, nodeW - 40*scale, 4*scale);
+        ctx.fillRect(aX + 20*scale, aY + 35*scale, nodeW - 70*scale, 4*scale);
+        ctx.fillStyle = colorWorkflowFill;
+
+        // Line down to diamond
+        const dSize = 50 * scale;
+        const dY = aY + nodeH + gapY + dSize; // Center of diamond
+        ctx.beginPath();
+        ctx.moveTo(cx, aY + nodeH);
+        ctx.lineTo(cx, dY - dSize);
+        ctx.stroke();
+
+        // 3. Condition Diamond
+        ctx.beginPath();
+        ctx.moveTo(cx, dY - dSize);
+        ctx.lineTo(cx + dSize, dY);
+        ctx.lineTo(cx, dY + dSize);
+        ctx.lineTo(cx - dSize, dY);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Branches
+        const leftX = cx - branchW;
+        const rightX = cx + branchW;
+        const branchY = dY + dSize + gapY;
+
+        // Left Path (Yes)
+        ctx.beginPath();
+        ctx.moveTo(cx - dSize, dY);
+        ctx.lineTo(leftX, dY);
+        ctx.lineTo(leftX, branchY);
+        ctx.stroke();
+        
+        // Right Path (No)
+        ctx.beginPath();
+        ctx.moveTo(cx + dSize, dY);
+        ctx.lineTo(rightX, dY);
+        ctx.lineTo(rightX, branchY);
+        ctx.stroke();
+
+        // Left Action Node
+        roundRect(leftX - nodeW/2, branchY, nodeW, nodeH, 8);
+        
+        // Right Action Node
+        roundRect(rightX - nodeW/2, branchY, nodeW, nodeH, 8);
+
+        // Optional: Pulse traveling down
+        const pulseSpeed = 0.002;
+        const p = (time * pulseSpeed) % 1;
+        const totalLen = (branchY + nodeH - startY);
+        const pulseY = startY + p * totalLen;
+        
+        // Only draw pulse if it's within bounds broadly (simplified)
+        // Draw a glowing dot moving down center
+        if (p < 0.6) {
+           const curY = startY + (p/0.6) * (dY - startY);
+           ctx.beginPath();
+           ctx.arc(cx, curY, 3, 0, Math.PI * 2);
+           ctx.fillStyle = colorSignal;
+           ctx.shadowColor = colorSignal;
+           ctx.shadowBlur = 10;
+           ctx.fill();
+           ctx.shadowBlur = 0;
+        } else {
+           // Split pulse
+           const subP = (p - 0.6) / 0.4;
+           const curY = dY + subP * (branchY + nodeH - dY);
+           // Left
+           ctx.beginPath();
+           ctx.arc(leftX, curY, 3, 0, Math.PI * 2);
+           ctx.fillStyle = colorSignal;
+           ctx.fill();
+           // Right
+           ctx.beginPath();
+           ctx.arc(rightX, curY, 3, 0, Math.PI * 2);
+           ctx.fillStyle = colorSignal;
+           ctx.fill();
+        }
+    };
+
     let frameId: number;
     let time = 0;
 
@@ -106,6 +240,9 @@ export const HeroBackground: React.FC = () => {
       
       // Clear canvas (transparent background to let CSS bg show through)
       ctx.clearRect(0, 0, width, height);
+
+      // Draw Workflow Schematic Layer
+      drawWorkflow(time);
 
       // Update Particles
       particles.forEach((p, index) => {
@@ -149,7 +286,7 @@ export const HeroBackground: React.FC = () => {
         ctx.fill();
       });
 
-      // Update & Draw Signals (The "Data" flowing through the circuit)
+      // Update & Draw Signals
       if (time % 30 === 0) spawnSignal(); 
 
       for (let i = signals.length - 1; i >= 0; i--) {
