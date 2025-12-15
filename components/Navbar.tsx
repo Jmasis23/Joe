@@ -23,10 +23,10 @@ const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { name: 'Services', href: '#services' },
+    { name: 'About', href: '#about' },
+    { name: 'Expertise', href: '#expertise' },
     { name: 'Process', href: '#process' },
-    { name: 'Results', href: '#testimonials' },
-    { name: 'FAQ', href: '#faq' },
+    { name: 'Testimonials', href: '#testimonials' },
   ];
 
   return (
@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center space-x-2">
             <Terminal className="h-8 w-8 text-neon" />
             <span className="text-xl font-bold tracking-tight text-white">
-              GHL<span className="text-neon">withJoe</span>
+              Joe<span className="text-neon">Asis</span>
             </span>
           </div>
 
@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
               </a>
             ))}
             <Button variant="primary" size="sm" onClick={scrollToAudit}>
-              Book Audit
+              Let's Talk
             </Button>
           </div>
 
@@ -92,7 +92,7 @@ const Navbar: React.FC = () => {
               setIsOpen(false);
               scrollToAudit();
             }}>
-              Book Audit
+              Let's Talk
             </Button>
           </div>
         </div>

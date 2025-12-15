@@ -3,79 +3,79 @@ import {
   Workflow, 
   Rocket, 
   Puzzle, 
-  AlertTriangle, 
-  Activity, 
-  Layers, 
-  Maximize 
+  LayoutDashboard, 
+  MessageSquare, 
+  Bot, 
+  CreditCard 
 } from "lucide-react";
 import { ServiceItem, Testimonial, ProcessStep, FAQItem, PainPoint } from "./types";
 
 export const PAIN_POINTS: PainPoint[] = [
   {
-    title: "Spaghetti Workflows",
-    problem: "Automation loops that trigger randomly, confuse leads, and break constantly.",
-    solution: "Streamlined, documented logic that runs flawlessly every time.",
+    title: "Organizing Client Data",
+    problem: "Messy lists and cold leads cluttering your system.",
+    solution: "I build 'List Cleanup' workflows and 'Database Reactivation' campaigns to generate new sales from old leads.",
+    icon: LayoutDashboard
+  },
+  {
+    title: "Managing Leads",
+    problem: "Potential customers falling through the cracks.",
+    solution: "I set up 'Convert Leads to Events' and 'Generic Nurture' sequences so every lead is followed up with automatically.",
     icon: Workflow
   },
   {
-    title: "Underutilized Features",
-    problem: "Paying $297+ but only using the CRM and ignoring standard features.",
-    solution: "Full implementation of Snapshots, Funnels, and Membership areas.",
-    icon: Layers
+    title: "Payment Automations",
+    problem: "Chasing clients for payments and manual booking.",
+    solution: "I implement 'Payment Automations' to collect money faster and 'Calendar Automations' to handle bookings without emails.",
+    icon: CreditCard
   },
   {
-    title: "Integration Headaches",
-    problem: "Zapier bills skyrocketing or APIs not syncing data correctly.",
-    solution: "Native integrations and efficient Make.com webhooks.",
-    icon: Puzzle
-  },
-  {
-    title: "Scalability Limits",
-    problem: "Onboarding a new client takes 3 days of manual setup.",
-    solution: "One-click snapshot deployment and automated onboarding forms.",
-    icon: Maximize
+    title: "AI & Chat Bots",
+    problem: "Missing calls and questions after hours.",
+    solution: "I deploy 24/7 AI receptionists that answer questions and qualify leads instantly so you don't have to be on your phone.",
+    icon: Bot
   }
 ];
 
 export const SERVICES: ServiceItem[] = [
   {
-    id: "cleanup",
-    category: "GHL Clean-Up",
-    title: "Platform Audit & Optimization",
-    description: "Turn your messy dashboard into a lean, mean conversion machine. We declutter tags, fix broken automations, and standardize your naming conventions.",
-    features: ["Workflow Pruning", "Tag & Custom Field Organization", "Dashboard Simplification", "DNS & Domain Fixes"],
-    idealFor: "Agencies with 1+ years of accumulated 'data junk'.",
-    timeline: "3-5 Days",
-    icon: Wrench
-  },
-  {
-    id: "automation",
-    category: "Automation Engineering",
-    title: "Advanced Workflow Build-outs",
-    description: "Move beyond basic auto-responders. We build multi-path behavioral flows that nurture leads based on their specific actions.",
-    features: ["Multi-channel Sequences (SMS/Email/VM)", "Pipeline Automation", "Appointment Reminders", "Database Reactivation"],
-    idealFor: "Marketers wanting to clone their best sales rep.",
-    timeline: "1-2 Weeks",
+    id: "systems",
+    category: "System Architecture",
+    title: "Workflows & Automation",
+    description: "For the past 5 years, I've built the systems businesses need to handle leads, book appointments, and close sales automatically. I don't just support; I build.",
+    features: ["Database Reactivation Campaigns", "Review Request Automations", "Seasonal Email Marketing", "Referral Systems"],
+    idealFor: "Agencies needing robust backend logic.",
+    timeline: "Ongoing / Project",
     icon: Workflow
   },
   {
-    id: "implementation",
-    category: "Implementation",
-    title: "Full Account Setup & Migration",
-    description: "Moving from HubSpot, ClickFunnels, or ActiveCampaign? We handle the data migration and setup your entire ecosystem.",
-    features: ["Data Migration (Contacts/Notes)", "Funnel Re-building", "Calendar Configuration", "Staff Training"],
-    idealFor: "Businesses switching to GHL for the first time.",
-    timeline: "2-3 Weeks",
+    id: "web",
+    category: "Web & Funnels",
+    title: "Websites & Funnels",
+    description: "I build complete websites and sales funnels directly inside GoHighLevel, ensuring the whole system works together from the first click to the final sale.",
+    features: ["Funnel Design", "Landing Page Optimization", "Facebook/Google Ads Traffic", "Integrated Forms & Surveys"],
+    idealFor: "Businesses launching new offers.",
+    timeline: "1-2 Weeks",
     icon: Rocket
   },
   {
-    id: "integration",
-    category: "Integrations",
-    title: "API & Third-Party Connections",
-    description: "Connect GHL to the rest of your tech stack. We handle complex webhooks, custom API calls, and tricky Zapier/Make scenarios.",
-    features: ["Make.com/Zapier Optimization", "Custom API Webhooks", "Reporting Dashboards", "External Payment Gateways"],
-    idealFor: "SaaSpreneurs needing custom functionality.",
-    timeline: "Custom Quote",
+    id: "tech",
+    category: "Tech & AI",
+    title: "AI Bots & Integrations",
+    description: "I set up 'Inbound Messaging' and 'Phone Automations' so clients never miss a message. I connect different apps using Zapier and basic web design principles.",
+    features: ["24/7 AI Receptionists", "Zapier Integrations", "Phone Automations", "Review Automations"],
+    idealFor: "Modernizing customer communication.",
+    timeline: "Custom Scope",
+    icon: Bot
+  },
+  {
+    id: "onboarding",
+    category: "Success",
+    title: "Client Success & Training",
+    description: "I personally helped over 10 new subscribers get started every single day. I lead weekly video calls to teach them software usage and fix technical issues.",
+    features: ["Weekly Training Calls", "Technical Troubleshooting", "Account Setup", "SaaS Onboarding"],
+    idealFor: "SaaSpreneurs needing support.",
+    timeline: "Retainer",
     icon: Puzzle
   }
 ];
@@ -83,65 +83,65 @@ export const SERVICES: ServiceItem[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
-    quote: "Our GHL account was a disaster zone. Joe came in, archived 50+ useless workflows, and rebuilt our core nurture sequence. Lead response rate jumped overnight.",
-    author: "Sarah Jenkins",
-    role: "Agency Owner, ScaleUp Media",
-    metric: "Lead Response: +30%"
+    quote: "Joe knows how to build systems that work. He helped us save time and make money by setting up automations that run in the background.",
+    author: "SaaSpreneur Partner",
+    role: "Agency Owner",
+    metric: "5 Years Experience"
   },
   {
     id: 2,
-    quote: "I was spending 10 hours a week just fixing broken zaps. GHLwithJoe built a native integration system that just works. I finally trust my CRM again.",
-    author: "Mike Ross",
-    role: "Founder, Ross Realty",
-    metric: "Time Saved: 10hrs/wk"
+    quote: "He doesn't just 'support' clients; he builds the workflows they need to handle leads and close sales automatically.",
+    author: "Happy Client",
+    role: "Business Owner",
+    metric: "10+ Daily Onboardings"
   },
   {
     id: 3,
-    quote: "The strategic consulting was worth 10x the implementation cost. He showed us features we didn't even know existed that replaced three other software subscriptions.",
-    author: "Elena Rodriguez",
-    role: "Operations Director, FitLife",
-    metric: "Saved $400/mo in SaaS"
+    quote: "The AI bot Joe set up acts like a 24/7 receptionist. It qualifies leads instantly so I don't have to be on my phone all day.",
+    author: "Local Business",
+    role: "Service Provider",
+    metric: "24/7 Availability"
   }
 ];
 
 export const PROCESS_STEPS: ProcessStep[] = [
   {
     number: 1,
-    title: "The Audit",
-    description: "We dive into your sub-account (read-only access) to identify bottlenecks, broken links, and optimization opportunities."
+    title: "Problem Analysis",
+    description: "I listen to your problems—whether it's messy data, missed leads, or manual work—and identify the root cause."
   },
   {
     number: 2,
-    title: "The Blueprint",
-    description: "You get a detailed scope of work and a fixed-price quote. No hourly billing surprises. You know exactly what you're getting."
+    title: "System Design",
+    description: "I design a solution using GHL tools: Workflows, Snapshots, and AI Bots tailored to your specific needs."
   },
   {
     number: 3,
-    title: "The Build",
-    description: "We get to work. You get regular loom updates. We test every trigger, link, and email before handing it over."
+    title: "Implementation",
+    description: "I build the automations, set up the funnels, and integrate the ads. I ensure everything talks to each other."
   },
   {
     number: 4,
-    title: "Handover & Support",
-    description: "We walk you through the new setup on a live call and provide video documentation so your team is never lost."
+    title: "Optimization",
+    description: "I monitor the results, fixing any technical issues and teaching you how to use the software effectively."
   }
 ];
 
 export const FAQS: FAQItem[] = [
   {
-    question: "Do you work on live client accounts?",
-    answer: "Yes, but we follow strict safety protocols. We typically work in a sandbox environment or during off-hours to ensure no disruption to active campaigns."
+    question: "What is your main expertise?",
+    answer: "I am a Client Success Manager and GoHighLevel Expert. I specialize in building systems, running ads, and creating automations that save time and make money."
   },
   {
-    question: "How do you handle access and security?",
-    answer: "We recommend creating a specific user profile for us with limited permissions. We use LastPass for credential management and 2FA where available."
+    question: "Can you handle technical integrations?",
+    answer: "Yes. I have extensive experience with Zapier, connecting different apps, and setting up complex 'Inbound Messaging' and 'Phone Automations'."
   },
   {
-    question: "Do you offer white-label services for my agency?",
-    answer: "Yes, we have a specific white-label partner program where we can act as your internal tech team. Contact us for partner pricing."
+    question: "Do you offer training?",
+    answer: "Absolutely. I have led weekly video calls teaching over 10 new subscribers a day how to use the software and fixing their technical issues."
   },
   {
-    question: "What if things break after you finish?",
-    answer: "All implementation projects come with a 30-day warranty. If a workflow we built breaks due to our error, we fix it for free. Ongoing support packages are also available."
+    question: "How do I contact you?",
+    answer: "You can reach me at +639611553310 or via email at business.jmasis@gmail.com."
   }
 ];

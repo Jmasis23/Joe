@@ -4,14 +4,14 @@ import { PAIN_POINTS } from '../constants';
 
 const ProblemSolution: React.FC = () => {
   return (
-    <section className="py-24 bg-dark-800">
+    <section id="expertise" className="py-24 bg-dark-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Is Your GHL Account a <span className="text-neon">Ghost Town</span> or a <span className="text-red-500">Mess</span>?
+            How I Solve <span className="text-neon">Business Problems</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-            GoHighLevel is powerful, but it's easy to get tangled in the wires. We solve the specific headaches that keep agency owners up at night.
+            I specialize in identifying bottlenecks in your agency processes and fixing them with robust GoHighLevel automation.
           </p>
         </div>
 

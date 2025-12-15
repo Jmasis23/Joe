@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import About from './components/About';
 import ProblemSolution from './components/ProblemSolution';
 import Services from './components/Services';
 import SocialProof from './components/SocialProof';
@@ -33,7 +34,7 @@ const MobileStickyCTA: React.FC = () => {
         onClick={() => document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' })}
         className="shadow-lg shadow-neon/20"
       >
-        Book Free Audit
+        Work With Me
        </Button>
     </div>
   );
@@ -45,6 +46,9 @@ const App: React.FC = () => {
       <Navbar />
       <main>
         <Hero />
+        <div id="about">
+          <About />
+        </div>
         <ProblemSolution />
         <Services />
         <SocialProof />
