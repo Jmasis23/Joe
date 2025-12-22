@@ -18,7 +18,7 @@ const FinalCTA: React.FC = () => {
             Next 3 audit slots open this week. Secure your free review now.
           </p>
           
-          <div className="rounded-xl overflow-hidden bg-white/5 border border-white/10 shadow-2xl mx-auto relative z-20">
+          <div className="rounded-xl overflow-hidden bg-white shadow-2xl mx-auto relative z-20">
               {/* Google Calendar Appointment Scheduling begin */}
               <iframe 
                 src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ167Uj3WtFKB9UOMQsx3bxRkk_NKN1kdvI3pwT6OqwvoaLCi-mhnQrG9b6PmhepolAgrnGuCY-X?gv=true" 
